@@ -1,9 +1,10 @@
 const qwerty = document.querySelector('#qwerty');
 const phrase = document.querySelector('#phrase');
 const startBtn = document.querySelector('.btn__reset');
-
-const phrases = ['dog gone', 'cat wild', 'bird of prey', 'fish monger', 'tiger and po'];
-let missed = 0; //collect missed guesses
+const removeImg = document.querySelectorAll('.tries');
+const parentOL = document.querySelector('#scoreboard ol');
+const phrases = ['dog gone', 'cat wild', 'bird of prey', 'fish head', 'tiger and po'];
+let missed = 0;
 
 
 
@@ -45,26 +46,40 @@ function addPhraseToDisplay(arr) {
 
 
 function checkLetter(btn) {
-    const letter = document.querySelectorAll('.letter');
-    let match = '';
 
-    letter.forEach(element => {
-        
-        if (element.textContent === btn.textContent) {
-            match = element;
+    const letter = document.querySelectorAll('.letter');
+    let match = null;
+
+    for (const i of letter) {
+
+        if (i.textContent === btn.textContent) {
+            match = i;
             match.classList.add('show');
             btn.classList.add('chosen');
             btn.disabled = true;
+            // break skip;
+           
         }
-
-    });
+        else if(i.textContent !== btn.textContent){
+            btn.style.opacity ='0.5';
+             btn.disabled = true;
+        }
+    }
+    
     return match;
 }
 
 function newFunction(e) {
     const btn = e.target
-   
-    let letterFound = checkLetter(btn)
+    //run only if the user clicks a button
+    if (e.target.tagName == 'BUTTON') {
+        let letterFound = checkLetter(btn);
+        if (letterFound === null) {
+            parentOL.removeChild(removeImg[missed]);
+            missed++;
+        }
+
+    }
 
 }
 

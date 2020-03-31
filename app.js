@@ -57,15 +57,9 @@ function checkLetter(btn) {
             match.classList.add('show');
             btn.classList.add('chosen');
             btn.disabled = true;
-            // break skip;
-           
-        }
-        else if(i.textContent !== btn.textContent){
-            btn.style.opacity ='0.5';
-             btn.disabled = true;
         }
     }
-    
+
     return match;
 }
 
@@ -75,6 +69,8 @@ function newFunction(e) {
     if (e.target.tagName == 'BUTTON') {
         let letterFound = checkLetter(btn);
         if (letterFound === null) {
+            btn.style.opacity = '0.5';
+            btn.disabled = true;
             parentOL.removeChild(removeImg[missed]);
             missed++;
         }

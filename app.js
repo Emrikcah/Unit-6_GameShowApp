@@ -3,10 +3,9 @@ const phrase = document.querySelector('#phrase');
 const startBtn = document.querySelector('.btn__reset');
 const removeImg = document.querySelectorAll('.tries');
 const parentOL = document.querySelector('#scoreboard ol');
+const title = document.querySelector('.title');
 const phrases = ['dog gone', 'cat wild', 'bird of prey', 'fish head', 'tiger and po'];
 let missed = 0;
-
-
 
 let randPhrases = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(randPhrases);
@@ -44,7 +43,6 @@ function addPhraseToDisplay(arr) {
     });
 }
 
-
 function checkLetter(btn) {
 
     const letter = document.querySelectorAll('.letter');
@@ -59,13 +57,12 @@ function checkLetter(btn) {
             btn.disabled = true;
         }
     }
-
     return match;
 }
 
 function newFunction(e) {
     const btn = e.target
-    //run only if the user clicks a button
+
     if (e.target.tagName == 'BUTTON') {
         let letterFound = checkLetter(btn);
         if (letterFound === null) {
@@ -74,10 +71,32 @@ function newFunction(e) {
             parentOL.removeChild(removeImg[missed]);
             missed++;
         }
+    }
+    checkWin(btn);
+}
 
+function checkWin(btn) {
+    const letter = document.querySelectorAll('.letter');
+    const show = document.querySelectorAll('.show');
+
+    if (letter.length === show.length) {
+        btn.style.opacity = '0.0';
+        overlay.classList.add('win');
+        overlay.style.display = 'flex';
+        title.textContent = 'Winner';
+        
+
+
+    } else if (missed >= 5) {
+        overlay.style.display = 'flex';
+        title.textContent = 'Loser';
+        overlay.classList.add('lose');
     }
 
+    // btn.style.removeProperty('opacity');
+
 }
+
 
 /*******************EventListenrs*************** */
 startBtn.addEventListener('click', hideOverlay);

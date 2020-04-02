@@ -4,8 +4,8 @@ const startBtn = document.querySelector('.btn__reset');
 const removeImg = document.querySelectorAll('.tries');
 const parentOL = document.querySelector('#scoreboard ol');
 const title = document.querySelector('.title');
-const phrases = ['dog gone', 'cat wild', 'bird of prey', 'fish head', 'tiger and po'];
 let missed = 0;
+const phrases = ['I Gamon will save us', 'Azeroth must not fall', 'Lord Illidan knows the way', 'May your blades never dull', 'Go with honor'];
 
 let randPhrases = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(randPhrases);
@@ -43,14 +43,17 @@ function addPhraseToDisplay(arr) {
     });
 }
 
+//check for a match and return 
 function checkLetter(btn) {
 
     const letter = document.querySelectorAll('.letter');
     let match = null;
 
     for (const i of letter) {
+        let phraseLetter = i.textContent.toLowerCase();
+        let keyBoardPress = btn.textContent.toLowerCase();
 
-        if (i.textContent === btn.textContent) {
+        if (phraseLetter === keyBoardPress) {
             match = i;
             match.classList.add('show');
             btn.classList.add('chosen');
@@ -60,44 +63,44 @@ function checkLetter(btn) {
     return match;
 }
 
-function newFunction(e) {
+//remove the hearts if the user guesses incorrectly
+function checkMissed(e) {
     const btn = e.target
 
-    if (e.target.tagName == 'BUTTON') {
+    if (btn.tagName == 'BUTTON') {
+
         let letterFound = checkLetter(btn);
         if (letterFound === null) {
-            btn.style.opacity = '0.5';
+            // btn.classList.add('opacity');
+            // btn.style.opacity = '0.5';
+            btn.classList.add('chosen');
             btn.disabled = true;
             parentOL.removeChild(removeImg[missed]);
             missed++;
         }
     }
-    checkWin(btn);
+    checkWin();
 }
 
-function checkWin(btn) {
+//check if the user wins or loses
+function checkWin() {
     const letter = document.querySelectorAll('.letter');
     const show = document.querySelectorAll('.show');
 
     if (letter.length === show.length) {
-        btn.style.opacity = '0.0';
+        // btn.style.opacity = '0.0';
         overlay.classList.add('win');
         overlay.style.display = 'flex';
-        title.textContent = 'Winner';
-        
-
+        title.textContent = 'Victory';
 
     } else if (missed >= 5) {
         overlay.style.display = 'flex';
-        title.textContent = 'Loser';
+        title.textContent = 'Try Again';
         overlay.classList.add('lose');
     }
-
-    // btn.style.removeProperty('opacity');
-
 }
 
 
 /*******************EventListenrs*************** */
 startBtn.addEventListener('click', hideOverlay);
-qwerty.addEventListener('click', newFunction);
+qwerty.addEventListener('click', checkMissed);

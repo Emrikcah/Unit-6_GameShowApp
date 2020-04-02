@@ -7,7 +7,7 @@
   --color-win: #78CF82;
   --color-lose: #D94545;
   --color-start: #5b85b7;
-  --color-neutral: #445069;
+  --color-neutral: rgb(68, 80, 105);
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
   --color-keys-light: #E5E5E5;
@@ -132,6 +132,12 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+}
+
+/* add to missed guess button */
+.opacity{
+    background-color: rgba(68, 80, 105,0.5);
+    
 }
 
 .title {

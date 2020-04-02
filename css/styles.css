@@ -135,8 +135,9 @@ button {
 }
 
 /* add to missed guess button */
-.opacity{
-    background-color: rgba(68, 80, 105,0.5);
+.wrongGuess{
+    background-color: rgba(217, 69, 69,0.8);
+    color: #fff;
     
 }
 

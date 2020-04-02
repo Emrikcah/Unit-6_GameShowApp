@@ -73,7 +73,7 @@ function checkMissed(e) {
         if (letterFound === null) {
             // btn.classList.add('opacity');
             // btn.style.opacity = '0.5';
-            btn.classList.add('chosen');
+            btn.classList.add('wrongGuess');
             btn.disabled = true;
             parentOL.removeChild(removeImg[missed]);
             missed++;

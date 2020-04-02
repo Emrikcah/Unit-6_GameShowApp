@@ -51,9 +51,9 @@ function checkLetter(btn) {
 
     for (const i of letter) {
         let phraseLetter = i.textContent.toLowerCase();
-        let keyBoardPress = btn.textContent.toLowerCase();
+        let keyboardPress = btn.textContent.toLowerCase();
 
-        if (phraseLetter === keyBoardPress) {
+        if (phraseLetter === keyboardPress) {
             match = i;
             match.classList.add('show');
             btn.classList.add('chosen');
